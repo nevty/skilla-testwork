@@ -1,12 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import "react-datepicker/dist/react-datepicker.css";
 import reportWebVitals from './reportWebVitals';
+import {QueryClient, QueryClientProvider} from "react-query";
+import {ChakraProvider} from "@chakra-ui/react";
+import {Provider as ReduxProvider} from "react-redux";
+import {store} from "./redux/store";
+import App from './App';
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnReconnect: false,
+            refetchOnWindowFocus: false
+        }
+    }
+})
+
+const Providers: React.FC = ({children}) => (
+    <ChakraProvider>
+        <QueryClientProvider client={queryClient}>
+            <ReduxProvider store={store}>
+                {children}
+            </ReduxProvider>
+        </QueryClientProvider>
+    </ChakraProvider>
+)
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <Providers>
+          <App/>
+      </Providers>
   </React.StrictMode>,
   document.getElementById('root')
 );

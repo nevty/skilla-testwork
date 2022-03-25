@@ -1,25 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Sidebar from "./components/Sidebar";
+import {Box, Container, Flex, VStack} from "@chakra-ui/react";
+import Header from "./components/Header";
+import CallsTab from "./components/tabs/CallsTab";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Flex w="100%" h="100vh" className="App">
+          <Sidebar/>
+          <VStack w="100%" h="100%" bg="#F1F4F9">
+              <Header height="62"/>
+              <Box w="100%" h="100%" overflow="auto">
+                  <Container maxW="6xl">
+                      <CallsTab/>
+                  </Container>
+              </Box>
+          </VStack>
+      </Flex>
   );
 }
 
